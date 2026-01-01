@@ -124,6 +124,14 @@ def extract_answers(request):
    return submitted_anwsers
 
 
+# method to calculate if the learner gets the score of the question
+def is_get_score(self, selected_ids):
+    all_answers = self.choice_set.filter(is_correct=True).count()
+    selected_correct = self.choice_set.filter(is_correct=True, id__in=selected_ids).count()
+    if all_answers == selected_correct:
+        return True
+    else:
+        return False
 # <HINT> Create an exam result view to check if learner passed exam and show their question results and result for each question,
 # you may implement it based on the following logic:
         # Get course and submission based on their ids
